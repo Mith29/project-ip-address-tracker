@@ -35,14 +35,17 @@
       <section>
         <form action="/search" method="get" id="search-form">
           <h1>IP Address Tracker</h1>
-          <label for="searchInput"></label>
+          <label for="ipAddressInput"></label>
           <input
-            type="search"
+            type="text"
             name="search"
-            id="searchInput"
+            id="ipAddressInput"
             placeholder="Search for any IP address or domain IP Address"
+            pattern ="^(?>(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.){3}(?1)$"
+             title="A valid IPv4 address (e.g., 192.168.1.1)"
           />
-          <button type="submit" id="search-btn">
+          <span class="error-message" id="input-error"></span>
+          <button type="submit" id="search-button">
             <img src="./images/icon-arrow.svg" alt="an arrow."/>
           </button>
         </form> 
