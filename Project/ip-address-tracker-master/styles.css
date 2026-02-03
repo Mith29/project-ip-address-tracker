@@ -3,21 +3,20 @@
   --Very-Dark-Gray: hsl(0, 0%, 17%);
 }
 
-#search-button {
+/* #search-button {
   border: none;
-  background-color: black;
   padding: 17px;
   padding-left: 20px;
   padding-right: 20px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   margin-left: 0px;
-}
+} */
 body {
   font-family: "Rubik", sans-serif;
 }
 
-#ipAddressInput {
+/* #ipAddressInput {
   font-size: 18px;
 
   border: none;
@@ -26,7 +25,7 @@ body {
   border-bottom-left-radius: 10px;
   width: 400px;
   margin-right: 0px;
-}
+} */
 /* #api-data {
     border: 3px solid black;
     position: absolute;
@@ -43,31 +42,46 @@ body {
   border-radius: 10px;
   padding: 20px;
   max-width: 700px;
-  width: 100%;
+  width: 70%;
   position: absolute;
+    top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+   /* padding: clamp(12px, 4vw, 20px); */
+    /* left: 50%;
+  transform: translateX(-50%); */
 }
 .info-item {
   display: flex;
   flex-direction: column;
   border-right: 2px solid var(--dark-gray);
-
+  gap: 6px;
+  padding: 5px;
+  /* min-width: 0; */
 
 }
 .info-item:last-child {
   border-right: none; /* remove border on last block */
 }
-
+ #ipAddressInput:focus {
+  outline: none;
+  box-shadow: none;
+}
 .label {
   font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--dark-gray);
   margin-bottom: 0.5rem;
 }
 .value {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  
+    max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
 }
 
 #search-form {
@@ -79,17 +93,18 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   
+  
 }
 h1 {
     color: white;
-    font-size: 20px;
-    font-weight: 400;
+    font-size: 22px;
+    font-weight: 500;
 }
 #map {
       
    z-index: 0;
     width: 100%;       /* full width of container */
-  height: 400px;     /* or any height you want */
+  height: 650px;     /* or any height you want */
 }
 .error-message {
   display: block;
@@ -97,4 +112,76 @@ h1 {
   font-size: 0.9em;
   margin-top: 5px;
   min-height: 1em; /* Reserve space to prevent layout shifts */
+}
+.container{
+  position: relative;
+}
+
+.combined-search {
+  display: flex;
+ justify-content: center;
+
+
+}
+.combined-search input,
+.combined-search button {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 0;
+}
+
+.combined-search input {
+  border-right: none; /* Remove the middle border */
+  border-radius: 15px 0 0 15px; /* Round left corners only */
+  max-width: 400px;
+width: 100%;
+font-size: 18px;
+border: none;
+}
+
+.combined-search button {
+  border-left: none; /* Remove the middle border */
+  border-radius: 0 15px 15px 0; /* Round right corners only */
+  cursor: pointer;
+    background-color: black;
+      border: none;
+  padding: 17px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+
+  /* Add hover styles, background color, etc. */
+}
+@media (max-width: 500px) {
+  #api-data {
+    grid-template-columns: 1fr; /* 4 rows stack */
+    text-align: center;
+        top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  }
+  .combined-search{
+    display: flex;
+  
+  }
+  .info-item{
+    border-right: none;
+    padding: 10px;
+
+  }
+  #search-form{
+    background-image: url(./images/pattern-bg-mobile.png);
+    /* height:250px; */
+  }
+
+ 
+.value{
+    overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
+  font-size: 1rem;
+ /* word-wrap: break-word;
+ text-wrap: wrap; */
+}
 }

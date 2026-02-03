@@ -35,6 +35,7 @@ searchForm.addEventListener("submit",function(event){
         return;
     }
  fetchAPIData(ipAddressInput.value);
+ ipAddressInput.value = ""; //clearing the input field 
 
 
 
@@ -84,7 +85,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 const customIcon = L.icon({
-  iconUrl: './images/icon-location.svg',      // path to your image
+  iconUrl: './images/icon-location.svg',      // path to the image
   iconSize: [25, 30],         // size of the icon
   iconAnchor: [20, 40],       // point of the icon which corresponds to marker location
   popupAnchor: [0, -40]       // point from which the popup should open

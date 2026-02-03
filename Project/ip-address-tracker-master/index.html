@@ -32,22 +32,23 @@
   </head>
   <body>
     <main>
-      <section>
+      <section class="container">
         <form action="/search" method="get" id="search-form" novalidate>
           <h1>IP Address Tracker</h1>
-          <label for="ipAddressInput"></label>
-          <input
-            type="text"
-            name="search"
-            id="ipAddressInput"
-            placeholder="Search for any IP address or domain IP Address"
-             title="A valid IPv4 address (e.g., 192.168.1.1)"
-          />
-          <button type="submit" id="search-button">
-                      
-
-            <img src="./images/icon-arrow.svg" alt="an arrow."/>
-          </button>
+          <div class="combined-search">
+            <label for="ipAddressInput"></label>
+            <input
+              type="text"
+              name="search"
+              id="ipAddressInput"
+              placeholder="Search for any IP address or domain IP Address"
+               title="A valid IPv4 address (e.g., 192.168.1.1)"
+            />
+            <button type="submit" id="search-button">
+            
+              <img src="./images/icon-arrow.svg" alt="an arrow."/>
+            </button>
+          </div>
           <span class="error-message" id="input-error"></span>
         </form> 
         <div id="api-data">
