@@ -152,6 +152,14 @@ border: none;
 
   /* Add hover styles, background color, etc. */
 }
+.combined-search button:hover,
+#ipAddressInput:hover {
+  cursor: pointer;
+}
+#location {
+  white-space: pre-line;
+}
+
 @media (max-width: 500px) {
   #api-data {
     grid-template-columns: 1fr; /* 4 rows stack */

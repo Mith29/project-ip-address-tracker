@@ -4,9 +4,6 @@ import { NetworkError, DataError } from "./error-handling.js";
 const searchForm = document.getElementById('search-form');
 const ipAddressInput = document.getElementById('ipAddressInput');
 const inputError = document.getElementById('input-error');
-const searchButton = document.getElementById('search-button');
-const apiData = document.getElementById('api-data');
-const mapSection = document.getElementById('map');
 const ipAddressSpan = document.getElementById("ip-address");
 const locationSpan = document.getElementById("location");
 const timezoneSpan = document.getElementById("timezone");
@@ -37,18 +34,20 @@ searchForm.addEventListener("submit",function(event){
     }
  fetchAPIData(ipAddressInput.value);
  ipAddressInput.value = ""; //clearing the input field 
-
-
-
 });
+
+
  async function fetchAPIData(ipAddress){
   try{
         const response = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${key}&ipAddress=${ipAddress}`);
+         const data = await response.json(); // returns object of arrays
           if (!response.ok) {
-      throw new Error (`HTTP error! Status: ${response.status}`);
+      throw new DataError ("API error! ");
     }
-
-        const data = await response.json(); // returns object of arrays
+if (!data.location || !data.location.lat) {
+      throw new DataError("Invalid data received from API");
+    }
+       
         renderAPIData(data);
           updateMap(data.location.lat, data.location.lng); // move map and marker
 
@@ -74,7 +73,6 @@ function renderAPIData(data) {
   timezoneSpan.textContent = `UTC ${data.location.timezone}`;
   ispSpan.textContent = data.isp;
   console.log(data);
-
 }
 
 //Here we create a map in the 'map' div, add tiles of our choice, and then add a marker with some text in a popup:
@@ -92,11 +90,11 @@ const customIcon = L.icon({
   popupAnchor: [0, -40]       // point from which the popup should open
 });
 
-L.marker([39.96118,-82.99879], { icon: customIcon }).addTo(map);
+let marker = L.marker([39.96118,-82.99879], { icon: customIcon }).addTo(map);
 
- let marker;
+ 
 function updateMap(lat, lng) {
-  map.setView([lat, lng], 13);
+  map.setView([lat, lng], 10);
   if (marker) {
     marker.setLatLng([lat, lng]);
   } else {
