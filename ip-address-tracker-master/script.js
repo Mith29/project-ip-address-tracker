@@ -37,9 +37,13 @@ searchForm.addEventListener("submit",function(event){
 });
 
 
- async function fetchAPIData(ipAddress){
+ async function fetchAPIData(ipAddress=""){
   try{
-        const response = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${key}&ipAddress=${ipAddress}`);
+    const url = ipAddress
+      ? `https://geo.ipify.org/api/v2/country,city?apiKey=${key}&ipAddress=${ipAddress}`
+      : `https://geo.ipify.org/api/v2/country,city?apiKey=${key}`;
+    const response = await fetch(url);
+        // const response = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${key}&ipAddress=${ipAddress}`);
          const data = await response.json(); // returns object of arrays
           if (!response.ok) {
       throw new DataError ("API error! ");
@@ -77,7 +81,7 @@ function renderAPIData(data) {
 
 //Here we create a map in the 'map' div, add tiles of our choice, and then add a marker with some text in a popup:
 
-let map = L.map('map').setView([39.96118,-82.99879], 10);
+let map = L.map('map').setView([0,0], 10);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -90,7 +94,7 @@ const customIcon = L.icon({
   popupAnchor: [0, -40]       // point from which the popup should open
 });
 
-let marker = L.marker([39.96118,-82.99879], { icon: customIcon }).addTo(map);
+let marker = L.marker([0,0], { icon: customIcon }).addTo(map);
 
  
 function updateMap(lat, lng) {
@@ -101,6 +105,10 @@ function updateMap(lat, lng) {
     marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
   }
 }
+//loading page with user's current location
+window.addEventListener("DOMContentLoaded", () => {
+  fetchAPIData(); // fetch user's current IP location
+});
 
 
 
