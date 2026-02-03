@@ -80,6 +80,34 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-L.marker([51.5, -0.09]).addTo(map)
-    .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-    .openPopup();
+const customIcon = L.icon({
+  iconUrl: './images/icon-location.svg',      // path to your image
+  iconSize: [25, 30],         // size of the icon
+  iconAnchor: [20, 40],       // point of the icon which corresponds to marker location
+  popupAnchor: [0, -40]       // point from which the popup should open
+});
+
+L.marker([51.5, -0.09], { icon: customIcon }).addTo(map);
+
+
+// function updateMap(lat, lng) {
+//   map.setView([lat, lng], 13);
+//   if (marker) {
+//     marker.setLatLng([lat, lng]);
+//   } else {
+//     marker = L.marker([lat, lng]).addTo(map);
+//   }
+// }
+// renderAPIData(data);           // update the info blocks
+// updateMap(data.location.lat, data.location.lng); // move map and marker
+
+// L.marker([51.5, -0.09]).addTo(map)
+    // .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+    // .openPopup();
+
+    //     let map = L.map("map").setView([0, 0], 2); // default world view
+// L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+//   attribution:
+//     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+// }).addTo(map);
+// let marker;
