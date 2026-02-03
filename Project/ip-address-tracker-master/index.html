@@ -33,7 +33,7 @@
   <body>
     <main>
       <section>
-        <form action="/search" method="get" id="search-form">
+        <form action="/search" method="get" id="search-form" novalidate>
           <h1>IP Address Tracker</h1>
           <label for="ipAddressInput"></label>
           <input
@@ -41,20 +41,32 @@
             name="search"
             id="ipAddressInput"
             placeholder="Search for any IP address or domain IP Address"
-            pattern ="^(?>(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.){3}(?1)$"
              title="A valid IPv4 address (e.g., 192.168.1.1)"
           />
-          <span class="error-message" id="input-error"></span>
           <button type="submit" id="search-button">
+                      
+
             <img src="./images/icon-arrow.svg" alt="an arrow."/>
           </button>
+          <span class="error-message" id="input-error"></span>
         </form> 
         <div id="api-data">
-          <span>IP Address</span>
-          <span>Location</span>
-          <span>Timezone UTC</span>
-          <!-- add offset value dynamically using the API -->
-          <span>ISP</span>
+          <div class="info-item">
+              <span class="label">IP Address</span>
+              <span id="ip-address" class="value">—</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Location</span>
+              <span id="location" class="value">—</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Timezone</span>
+              <span id="timezone" class="value">—</span>
+            </div>
+            <div class="info-item">
+              <span class="label">ISP</span>
+              <span id="isp" class="value">—</span>
+            </div>
         </div>
         <div id="map">
 

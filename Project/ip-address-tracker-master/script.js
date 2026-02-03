@@ -5,19 +5,23 @@ const ipAddressInput = document.getElementById('ipAddressInput');
 const inputError = document.getElementById('input-error');
 const searchButton = document.getElementById('search-button');
 const apiData = document.getElementById('api-data');
-const map = document.getElementById('map');
+const mapSection = document.getElementById('map');
+const ipAddressSpan = document.getElementById("ip-address");
+const locationSpan = document.getElementById("location");
+const timezoneSpan = document.getElementById("timezone");
+const ispSpan = document.getElementById("isp");
 
 //search input validation function----
 function validateIpAddress() {
-    const regex = "^(?>(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.){3}(?1)$"
+    const regex = /^(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)$/;
   if (ipAddressInput.validity.valueMissing) {
     ipAddressInput.setCustomValidity("IP Address is required");
-  } else if (searchInput.value !== regex) {
+  } else if (!regex.test(ipAddressInput.value)) {
     ipAddressInput.setCustomValidity("Enter valid IP Address.");
   } else {
     ipAddressInput.setCustomValidity("");
   }
-  inputError.textContent =searchInput.validationMessage;
+  inputError.textContent =ipAddressInput.validationMessage;
   return ipAddressInput.checkValidity();
 }
 //Adding event listener to validate input field
@@ -30,29 +34,47 @@ searchForm.addEventListener("submit",function(event){
     if(!isIPAddressValid){
         return;
     }
+ fetchAPIData(ipAddressInput.value);
 
 
 
 });
+ async function fetchAPIData(ipAddress){
+  try{
+        const response = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${key}&ipAddress=${ipAddress}`);
+          if (!response.ok) {
+      throw new Error (`HTTP error! Status: ${response.status}`);
+    }
 
+        const data = await response.json(); // returns object of arrays
+        renderAPIData(data);
+    //    console.log(`ip:${data.ip}\n Location:${data.location.city},${data.location.region}\n${data.location.postalCode}\nTimezone: UTC${data.location.timezone}\nISP:${data.isp}`);
+    }
+        
 
+     catch(error)  {
+        if (error instanceof NetworkError) {
+          console.log("Network Error", error.message);
+        } else if (error instanceof DataError) {
+          console.log("Data Error", error);
+        } else {
+          console.error("Unknown Error:", error);
+        }
+      }
+     
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+function renderAPIData(data) {
+  ipAddressSpan.textContent = data.ip;
+  locationSpan.textContent = `${data.location.city}, ${data.location.region}\n${data.location.postalCode}`;
+  timezoneSpan.textContent = `UTC ${data.location.timezone}`;
+  ispSpan.textContent = data.isp;
+  
+}
 
 //Here we create a map in the 'map' div, add tiles of our choice, and then add a marker with some text in a popup:
 
-// var map = L.map('map').setView([51.505, -0.09], 13);
+// let map = L.map('map').setView([0, 0], 2);
 
 // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
