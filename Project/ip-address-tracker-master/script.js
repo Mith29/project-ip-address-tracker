@@ -48,6 +48,8 @@ searchForm.addEventListener("submit",function(event){
 
         const data = await response.json(); // returns object of arrays
         renderAPIData(data);
+          updateMap(data.location.lat, data.location.lng); // move map and marker
+
     //    console.log(`ip:${data.ip}\n Location:${data.location.city},${data.location.region}\n${data.location.postalCode}\nTimezone: UTC${data.location.timezone}\nISP:${data.isp}`);
     }
         
@@ -69,12 +71,13 @@ function renderAPIData(data) {
   locationSpan.textContent = `${data.location.city}, ${data.location.region}\n${data.location.postalCode}`;
   timezoneSpan.textContent = `UTC ${data.location.timezone}`;
   ispSpan.textContent = data.isp;
-  
+  console.log(data);
+
 }
 
 //Here we create a map in the 'map' div, add tiles of our choice, and then add a marker with some text in a popup:
 
-let map = L.map('map').setView([0, 0], 2);
+let map = L.map('map').setView([39.96118,-82.99879], 10);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -87,19 +90,18 @@ const customIcon = L.icon({
   popupAnchor: [0, -40]       // point from which the popup should open
 });
 
-L.marker([51.5, -0.09], { icon: customIcon }).addTo(map);
+L.marker([39.96118,-82.99879], { icon: customIcon }).addTo(map);
 
-
-// function updateMap(lat, lng) {
-//   map.setView([lat, lng], 13);
-//   if (marker) {
-//     marker.setLatLng([lat, lng]);
-//   } else {
-//     marker = L.marker([lat, lng]).addTo(map);
-//   }
-// }
-// renderAPIData(data);           // update the info blocks
-// updateMap(data.location.lat, data.location.lng); // move map and marker
+ let marker;
+function updateMap(lat, lng) {
+  map.setView([lat, lng], 13);
+  if (marker) {
+    marker.setLatLng([lat, lng]);
+  } else {
+    marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
+  }
+}
+renderAPIData(data);           // update the info blocks
 
 // L.marker([51.5, -0.09]).addTo(map)
     // .bindPopup('A pretty CSS popup.<br> Easily customizable.')
@@ -110,4 +112,4 @@ L.marker([51.5, -0.09], { icon: customIcon }).addTo(map);
 //   attribution:
 //     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 // }).addTo(map);
-// let marker;
+
