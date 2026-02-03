@@ -1,4 +1,5 @@
 import { key } from "./secret.js";
+import { NetworkError, DataError } from "./error-handling.js";
 
 const searchForm = document.getElementById('search-form');
 const ipAddressInput = document.getElementById('ipAddressInput');
@@ -102,15 +103,7 @@ function updateMap(lat, lng) {
     marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
   }
 }
-renderAPIData(data);           // update the info blocks
 
-// L.marker([51.5, -0.09]).addTo(map)
-    // .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-    // .openPopup();
 
-    //     let map = L.map("map").setView([0, 0], 2); // default world view
-// L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-//   attribution:
-//     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-// }).addTo(map);
+
 
