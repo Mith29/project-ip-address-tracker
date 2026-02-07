@@ -1,4 +1,5 @@
 // scripts/make-secret.js
+// file to make sure to create the secret.js
 const fs = require("fs");
 const path = require("path");
 
