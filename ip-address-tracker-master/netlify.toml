@@ -1,0 +1,3 @@
+[build]
+  command = "node scripts/make-secret.js"
+  publish = "ip-address-tracker-master"
