@@ -6,7 +6,7 @@ It's a web application that detects and displays the geographical location of an
 Live demo-link: https://ip-address-tracker-mithravenu.netlify.app/ 
 
 
-<img src="./ip-address-tracker-master/images/Screenshot 2026-02-08 174346.png" width=300px/>
+<img src="./ip-address-tracker-master/images/Screenshot 2026-02-08 174346.png" width=500px/>
 
 
 
