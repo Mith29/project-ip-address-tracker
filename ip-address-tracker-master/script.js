@@ -9,19 +9,32 @@ const locationSpan = document.getElementById("location");
 const timezoneSpan = document.getElementById("timezone");
 const ispSpan = document.getElementById("isp");
 
-//search input validation function----
+
+// validation function (IPv4 + IPv6)
 function validateIpAddress() {
-    const regex = /^(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)$/;
+  const ipv4Regex =
+  /^(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)$/;
+
+// IPv6 Regex
+const ipv6Regex =
+  /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::1|::|([0-9a-fA-F]{1,4}:){1,7}:|:([0-9a-fA-F]{1,4}:){1,7}|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,3}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,2}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|([0-9a-fA-F]{1}:){1}(:[0-9a-fA-F]{1,4}){1,6}|:((:[0-9a-fA-F]{1,4}){1,7}|:))$/;
+
+  const value = ipAddressInput.value.trim();
+
   if (ipAddressInput.validity.valueMissing) {
     ipAddressInput.setCustomValidity("IP Address is required");
-  } else if (!regex.test(ipAddressInput.value)) {
-    ipAddressInput.setCustomValidity("Enter valid IP Address.");
-  } else {
+  } 
+  else if (!ipv4Regex.test(value) && !ipv6Regex.test(value)) {
+    ipAddressInput.setCustomValidity("Enter valid IPv4 or IPv6 address.");
+  } 
+  else {
     ipAddressInput.setCustomValidity("");
   }
-  inputError.textContent =ipAddressInput.validationMessage;
+
+  inputError.textContent = ipAddressInput.validationMessage;
   return ipAddressInput.checkValidity();
 }
+
 //Adding event listener to validate input field
 ipAddressInput.addEventListener("input", validateIpAddress);
 
