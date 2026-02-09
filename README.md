@@ -4,7 +4,11 @@
 It's a web application that detects and displays the geographical location of any IP address using the IPify Geolocation API and LeafletJS for interactive map visualization. The project uses HTML5, CSS3, JavaScript (ES6 Modules),IPify Geolocation API, LeafletJS + OpenStreetMap(Map) and Netlify for the deployment.
 
 Live demo-link: https://ip-address-tracker-mithravenu.netlify.app/ 
+
+
 <img src="./ip-address-tracker-master/images/Screenshot 2026-02-08 174346.png" width=300px/>
+
+
 
 Overview:
 This app allows users to search for any valid IPv4 or IPv6 address and view:
